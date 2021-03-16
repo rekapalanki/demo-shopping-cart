@@ -126,7 +126,7 @@ html {
             gap: 2rem;
             margin: auto;
             padding: 2rem;
-            max-width: 800px;
+            max-width: 1000px;
         }
 
         .card,
@@ -149,7 +149,7 @@ html {
 
 
         .card button {
-            min-width: 100px;
+            min-width: 80px;
             padding: .5rem;
         }
 
@@ -157,22 +157,25 @@ html {
             display: inline;
             margin: 0;
             padding: .5rem;
-            float: right;
+        }
+
+        .itemPrice {
+          float: right;
         }
 
         .cart {
             margin: 1rem auto;
-            max-width: calc(800px - 4rem);
+            max-width: calc(1000px - 4rem);
         }
 
-        .cartItems {
+        .cartItem {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 1rem;
         }
 
-        .cartItems p,
-        .cartItems h3 {
+        .cartItem p,
+        .cartItem h3 {
             margin: 1rem 0;
         }
 
