@@ -8,6 +8,7 @@ const endOfCart = document.querySelector('.endOfCart');                 // YGNI 
 const cartSum = document.getElementById('cartSum');                     // YGNI 
 const cartValueWrapper = document.querySelector('.cartValueWrapper');   // YGNI 
 const cartValue = document.getElementById('cartValue');                 // YGNI 
+const addItems = document.querySelectorAll('.addItem');
 
 // Increment / decrement elements
 // 01 Select input field, buttons + and -
@@ -74,7 +75,7 @@ decrementButtons.forEach(decrementEventListener);
 // 04 Prevent form from default execution 
 // Update cartSum and cartValue
 
-const addItems = document.querySelectorAll('.addItem');
+/******* TRASH FUNCTIONALITY needs to be fixed ********/
 
 const addItemsEventHandler = event => {
     const [ itemName, itemQty, itemPrice ] = [
@@ -107,20 +108,29 @@ const addItemsEventHandler = event => {
     const newId = document.getElementById(itemName);
     if (newId === null ) {                                          // Multiple arguments (newId === null && itemQty !== 0) just didn't work
         if (itemQty !== 0) {                                        // However, embedded arguments, as implemented here, work fine            
-        endOfCart.insertAdjacentElement('beforebegin', cartItem);
-        // The trash event listener has to be created after the trash element itself appears on the site 
-        const trash = document.querySelector('.trash');
-        const deleteItem = (event) => {
-            console.log('Line will be deleted');
-            event.target.parentElement.remove();
-        }
-        trash.addEventListener('click', deleteItem);
+            endOfCart.insertAdjacentElement('beforebegin', cartItem);
+            event.target.parentElement.children[1].value = 0;
+            // The trash event listener has to be created after the trash element itself appears on the site 
+            const trash = document.querySelector('.trash');
+            const deleteItem = (event) => {
+                console.log('Line will be deleted');
+                event.target.parentElement.remove();
+            }
+            trash.addEventListener('click', deleteItem);
         } 
     } else {
         const newIdQty = parseFloat(newId.querySelector('.cartItemQty').innerText);
         const newIdTotalValue = parseFloat(newId.querySelector('.cartItemTotalPrice').innerText);
         newId.querySelector('.cartItemQty').innerText = newIdQty + cartItemQtyValue;
         newId.querySelector('.cartItemTotalPrice').innerText = newIdTotalValue + cartItemTotalPriceValue;
+        event.target.parentElement.children[1].value = 0;
+        // The trash functionality has to work here as well 
+        const trash = document.querySelector('.trash');
+        const deleteItem = (event) => {
+            console.log('Line will be deleted');
+            event.target.parentElement.remove();
+        }
+        trash.addEventListener('click', deleteItem);
         console.log('It already exists');
     }
     event.preventDefault();   
@@ -131,4 +141,3 @@ const addItemsEventListener = (add) => {
 } 
 
 addItems.forEach(addItemsEventListener);
-
